@@ -1,1 +1,1 @@
-# degico-php
+# digico-php
