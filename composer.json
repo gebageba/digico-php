@@ -1,0 +1,37 @@
+{
+  "name": "evolu/digico-php",
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.13",
+    "phpunit/phpunit": "^9",
+    "mockery/mockery": "^1.5"
+  },
+  "require": {
+    "php": "^8.1",
+    "guzzlehttp/guzzle": "^7.5"
+  },
+  "description": "Simple Digico Client. This package can change point to digico ticket",
+  "license": [
+    "MIT"
+  ],
+  "authors": [
+    {
+      "name": "gebageba",
+      "email": "kanae.nagai@futurize.jp",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Evolu\\Digico\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Evolu\\Digico\\Test\\": "tests/"
+    }
+  },
+  "keywords": [
+    "digico",
+    "api"
+  ]
+}
