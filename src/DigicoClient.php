@@ -12,8 +12,8 @@ class DigicoClient
 
     private function __construct(
         private readonly DigicoParameter $digicoParameter,
-        private readonly string $sendUrl,
-        string $baseUrl
+        private readonly string $sendPath,
+        private readonly string $baseUrl
     )
     {
         $this->httpClient = new Client([
@@ -24,17 +24,17 @@ class DigicoClient
     public static function createGiftCode(
         DigicoParameter $digicoParameter,
         string $digicoCode,
-        string $sendUrl,
+        string $sendPath,
         string $baseUrl = 'https://user.digi-co.net'
-    )
+    ): array
     {
         $digicoClient = new self(
             $digicoParameter,
-            $sendUrl,
+            $sendPath,
             $baseUrl
         );
         $digicoClient->signature = Signature::create($digicoParameter, $digicoCode)->value();
-        $digicoClient->requestGiftCode();
+        return $digicoClient->requestGiftCode();
     }
 
     public function signature(): string
@@ -44,11 +44,11 @@ class DigicoClient
 
     private function requestGiftCode(): array
     {
-        $response = $this->httpClient->request('POST', $this->sendUrl, $this->params());
+        $response = $this->httpClient->request('POST', $this->baseUrl.$this->sendPath, $this->params());
         $decodedResponse = json_decode($response->getBody()->getContents(), true);
         $detailCode = DigicoResponseDetailCode::from($decodedResponse['detail_code']);
         if ($detailCode === DigicoResponseDetailCode::SUCCESS) {
-            return $decodedResponse['gifts'][0];
+            return $decodedResponse['gifts'][0];//TODO:0でいいのか？
         }
 
 //        if ($detailCode === DigicoResponseDetailCode::NOW_MAINTENANCE) {
