@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of DIGICO-PHP.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Evolu\Digico;
 
 use Evolu\Digico\Exception\DigicoException;
@@ -14,8 +20,7 @@ class DigicoClient
         private readonly DigicoParameter $digicoParameter,
         private readonly string $sendPath,
         private readonly string $baseUrl
-    )
-    {
+    ) {
         $this->httpClient = new Client([
             'base_url' => $baseUrl,
         ]);
@@ -26,8 +31,7 @@ class DigicoClient
         string $digicoCode,
         string $sendPath,
         string $baseUrl = 'https://user.digi-co.net'
-    ): array
-    {
+    ): array {
         $digicoClient = new self(
             $digicoParameter,
             $sendPath,
