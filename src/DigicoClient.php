@@ -8,7 +8,6 @@
 
 namespace Evolu\Digico;
 
-use Evolu\Digico\Exception\DigicoException;
 use Evolu\Digico\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -34,8 +33,7 @@ class DigicoClient
         string $digicoCode,
         string $sendPath,
         string $baseUrl = 'https://user.digi-co.net'
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         $digicoClient = new self(
             $digicoParameter,
             $sendPath,
