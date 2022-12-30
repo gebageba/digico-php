@@ -8,23 +8,26 @@ class DigicoParameter extends BaseBuilder
     public string $partnerCode;
     public int $amount;
     public string $timestamp;
-    public int $tradeId;
+    public string $tradeId;
+    public string $responseType;
 
     protected function __construct(
         int $gift_identify_code,
         string $partner_code,
         int $amount,
         string $timestamp,
-        TradeId $trade_id
+        string $trade_id,
+        string $response_type
     )
     {
-        parent::__construct(compact('gift_identify_code', 'partner_code', 'amount', 'timestamp', 'trade_id'));
+        parent::__construct(compact('gift_identify_code', 'partner_code', 'amount', 'timestamp', 'trade_id', 'response_type'));
 
         $this->giftIdentifyCode = $gift_identify_code;
         $this->partnerCode = $partner_code;
         $this->amount = $amount;
         $this->timestamp = $timestamp;
-        $this->tradeId = $trade_id->value();
+        $this->tradeId = $trade_id;
+        $this->responseType = $response_type;
     }
 
     public static function for(int $giftIdentifyCode, string $partnerCode): self
@@ -34,7 +37,8 @@ class DigicoParameter extends BaseBuilder
             $partnerCode,
             1,
             time(),
-            new TradeId()
+            (new TradeId())->value(),
+            'json'
         );
     }
 
@@ -50,10 +54,16 @@ class DigicoParameter extends BaseBuilder
         return $this->with('amount', $amount);
     }
 
-    public function withTimeStamp(int $timestamp):self
+    public function withTimeStamp(int $timestamp): self
     {
         $this->timestamp = $timestamp;
         return $this->with('timestamp', $timestamp);
+    }
+
+    public function withResponseType(string $responseType): self
+    {
+        $this->responseType = $responseType;
+        return $this->with('response_type', $responseType);
     }
 
     public function getData(): array
