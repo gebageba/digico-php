@@ -36,7 +36,7 @@ jobs:
 
       - name: Execute php-cs-fixer
         run: |
-          ./vendor/bin/php-cs-fixer fix --using-cache=no
+          ./vendor/bin/php-cs-fixer fix
 
       - name: Commit & Push
         uses: stefanzweifel/git-auto-commit-action@v4
