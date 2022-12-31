@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of DIGICO-PHP.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Evolu\Digico;
 
 class DigicoParameter extends BaseBuilder
@@ -18,8 +24,7 @@ class DigicoParameter extends BaseBuilder
         string $timestamp,
         string $trade_id,
         string $response_type
-    )
-    {
+    ) {
         parent::__construct(compact('gift_identify_code', 'partner_code', 'amount', 'timestamp', 'trade_id', 'response_type'));
 
         $this->giftIdentifyCode = $gift_identify_code;
