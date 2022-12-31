@@ -8,6 +8,7 @@
 
 namespace Evolu\Digico;
 
+use Evolu\Digico\Exception\DigicoException;
 use Evolu\Digico\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -34,14 +35,14 @@ class DigicoClient
         string $digicoCode,
         string $sendPath,
         string $baseUrl = 'https://user.digi-co.net'
-    ): ResponseInterface {
+    ): void {
         $digicoClient = new self(
             $digicoParameter,
             $sendPath,
             $baseUrl
         );
         $digicoClient->signature = Signature::create($digicoParameter, $digicoCode)->value();
-        return $digicoClient->requestGiftCode();
+        $digicoClient->response = $digicoClient->requestGiftCode();
     }
 
     public function getFirstGiftCode(): array
@@ -62,6 +63,11 @@ class DigicoClient
         }
 
         throw new DigicoException("{$detailCode}", 500);
+    }
+
+    public function response(): ResponseInterface
+    {
+        return $this->response();
     }
 
     public function signature(): string
