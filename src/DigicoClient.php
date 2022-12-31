@@ -18,6 +18,7 @@ class DigicoClient
 {
     private Client $httpClient;
     private string $signature;
+    private ResponseInterface $response;
 
     private function __construct(
         private readonly DigicoParameter $digicoParameter,
@@ -43,6 +44,26 @@ class DigicoClient
         );
         $digicoClient->signature = Signature::create($digicoParameter, $digicoCode)->value();
         return $digicoClient->requestGiftCode();
+    }
+
+    public function getFirstGiftCode(): array
+    {
+        $decodedResponse = json_decode($this->response->getBody()->getContents(), true);
+        $detailCode = DigicoResponseDetailCode::from($decodedResponse['detail_code']);
+        if ($detailCode === DigicoResponseDetailCode::SUCCESS) {
+            return $decodedResponse['gifts'][0];
+        }
+        if ($detailCode === DigicoResponseDetailCode::NOW_MAINTENANCE) {
+            throw new DigicoException('発券システムのメンテナンス中です。時間を空けて再度お試しください', 400);
+        }
+        if ($detailCode === DigicoResponseDetailCode::DAILY_CAPACITY_OVER) {
+            throw new DigicoException('日毎の交換上限を超過しています', 400);
+        }
+        if ($detailCode === DigicoResponseDetailCode::MONTHLY_CAPACITY_OVER) {
+            throw new DigicoException('月毎の交換上限を超過しています', 400);
+        }
+
+        throw new DigicoException("{$detailCode}", 500);
     }
 
     public function signature(): string
