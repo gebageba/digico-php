@@ -35,7 +35,7 @@ class DigicoClient
         string $digicoCode,
         string $sendPath,
         string $baseUrl = 'https://user.digi-co.net'
-    ): void {
+    ): self {
         $digicoClient = new self(
             $digicoParameter,
             $sendPath,
@@ -43,6 +43,7 @@ class DigicoClient
         );
         $digicoClient->signature = Signature::create($digicoParameter, $digicoCode)->value();
         $digicoClient->response = $digicoClient->requestGiftCode();
+        return $digicoClient;
     }
 
     public function getFirstGiftCode(): array
