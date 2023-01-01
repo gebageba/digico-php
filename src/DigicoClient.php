@@ -14,7 +14,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Psr\Http\Message\ResponseInterface;
 
-class DigicoClient
+final class DigicoClient implements DigicoClientInterface
 {
     private Client $httpClient;
     private string $signature;

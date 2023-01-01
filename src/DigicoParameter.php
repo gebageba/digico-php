@@ -8,7 +8,7 @@
 
 namespace Evolu\Digico;
 
-class DigicoParameter extends BaseBuilder
+final class DigicoParameter extends BaseBuilder implements DigicoParameterInterface
 {
     public int $giftIdentifyCode;
     public string $partnerCode;
@@ -16,6 +16,8 @@ class DigicoParameter extends BaseBuilder
     public string $timestamp;
     public string $tradeId;
     public string $responseType;
+
+    public const AMOUNT = 1;
 
     protected function __construct(
         int $gift_identify_code,
@@ -40,7 +42,7 @@ class DigicoParameter extends BaseBuilder
         return new self(
             $giftIdentifyCode,
             $partnerCode,
-            1,
+            self::AMOUNT,
             time(),
             (new TradeId())->value(),
             'json'

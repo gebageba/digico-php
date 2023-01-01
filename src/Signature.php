@@ -8,7 +8,7 @@
 
 namespace Evolu\Digico;
 
-class Signature
+final class Signature
 {
     private string $signature;
 

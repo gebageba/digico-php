@@ -8,6 +8,6 @@
 
 namespace Evolu\Digico\Exception;
 
-class GuzzleException extends Exception
+final class GuzzleException extends Exception
 {
 }
