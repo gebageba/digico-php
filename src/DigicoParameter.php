@@ -19,6 +19,14 @@ final class DigicoParameter extends BaseBuilder implements DigicoParameterInterf
 
     public const AMOUNT = 1;
 
+    /**
+     * @param int $gift_identify_code
+     * @param string $partner_code
+     * @param int $amount
+     * @param string $timestamp
+     * @param string $trade_id
+     * @param string $response_type
+     */
     protected function __construct(
         int $gift_identify_code,
         string $partner_code,
@@ -37,6 +45,11 @@ final class DigicoParameter extends BaseBuilder implements DigicoParameterInterf
         $this->responseType = $response_type;
     }
 
+    /**
+     * @param int $giftIdentifyCode
+     * @param string $partnerCode
+     * @return static
+     */
     public static function for(int $giftIdentifyCode, string $partnerCode): self
     {
         return new self(
@@ -49,30 +62,49 @@ final class DigicoParameter extends BaseBuilder implements DigicoParameterInterf
         );
     }
 
+    /**
+     * @param string $tradeId
+     * @return $this
+     */
     public function withTradeId(string $tradeId): self
     {
         $this->tradeId = $tradeId;
         return $this->with('trade_id', $tradeId);
     }
 
+    /**
+     * @param int $amount
+     * @return $this
+     */
     public function withAmount(int $amount): self
     {
         $this->amount = $amount;
         return $this->with('amount', $amount);
     }
 
+    /**
+     * @param int $timestamp
+     * @return $this
+     */
     public function withTimeStamp(int $timestamp): self
     {
         $this->timestamp = $timestamp;
         return $this->with('timestamp', $timestamp);
     }
 
+    /**
+     * @param string $responseType
+     * @return $this
+     */
     public function withResponseType(string $responseType): self
     {
         $this->responseType = $responseType;
         return $this->with('response_type', $responseType);
     }
 
+    /**
+     * @return array
+     */
     public function getData(): array
     {
         return parent::getData();

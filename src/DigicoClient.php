@@ -20,6 +20,11 @@ final class DigicoClient implements DigicoClientInterface
     private string $signature;
     private ResponseInterface $response;
 
+    /**
+     * @param DigicoParameter $digicoParameter
+     * @param string $sendPath
+     * @param string $baseUrl
+     */
     private function __construct(
         private readonly DigicoParameter $digicoParameter,
         private readonly string $sendPath,
@@ -30,6 +35,13 @@ final class DigicoClient implements DigicoClientInterface
         ]);
     }
 
+    /**
+     * @param DigicoParameter $digicoParameter
+     * @param string $digicoCode
+     * @param string $sendPath
+     * @param string $baseUrl
+     * @return static
+     */
     public static function createGiftCode(
         DigicoParameter $digicoParameter,
         string $digicoCode,
@@ -46,6 +58,9 @@ final class DigicoClient implements DigicoClientInterface
         return $digicoClient;
     }
 
+    /**
+     * @return array
+     */
     public function getFirstGiftCode(): array
     {
         $decodedResponse = json_decode($this->response->getBody()->getContents(), true);
@@ -66,16 +81,26 @@ final class DigicoClient implements DigicoClientInterface
         throw new DigicoException("{$detailCode}", 500);
     }
 
+    /**
+     * @return ResponseInterface
+     */
     public function response(): ResponseInterface
     {
         return $this->response();
     }
 
+    /**
+     * @return string
+     */
     public function signature(): string
     {
         return $this->signature;
     }
 
+    /**
+     * @return ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     private function requestGiftCode(): ResponseInterface
     {
         try {
@@ -85,6 +110,9 @@ final class DigicoClient implements DigicoClientInterface
         }
     }
 
+    /**
+     * @return array
+     */
     private function params(): array
     {
         $params = $this->digicoParameter->getData();

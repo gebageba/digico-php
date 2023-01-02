@@ -17,6 +17,9 @@ class TradeId
         $this->tradeId = uniqid(rand(10000, 99999));
     }
 
+    /**
+     * @return string
+     */
     public function value(): string
     {
         return $this->tradeId;

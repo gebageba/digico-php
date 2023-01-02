@@ -12,6 +12,9 @@ class BaseBuilder
 {
     private array $data;
 
+    /**
+     * @param array $data
+     */
     protected function __construct(array $data = [])
     {
         $this->data = $data;
@@ -29,6 +32,9 @@ class BaseBuilder
         return $copy;
     }
 
+    /**
+     * @return array
+     */
     protected function getData(): array
     {
         return $this->data;

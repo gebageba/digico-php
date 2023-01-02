@@ -12,6 +12,10 @@ final class Signature
 {
     private string $signature;
 
+    /**
+     * @param DigicoParameter $digicoParameter
+     * @param string $digicoCode
+     */
     private function __construct(
         DigicoParameter $digicoParameter,
         string $digicoCode
@@ -28,11 +32,19 @@ final class Signature
         $this->signature = hash_hmac('sha1', $hashMessage, $digicoCode, false);
     }
 
+    /**
+     * @return string
+     */
     public function value(): string
     {
         return $this->signature;
     }
 
+    /**
+     * @param DigicoParameter $digicoParameter
+     * @param string $digicoCode
+     * @return static
+     */
     public static function create(
         DigicoParameter $digicoParameter,
         string $digicoCode
