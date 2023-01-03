@@ -13,6 +13,9 @@ use PHPUnit\Framework\TestCase;
 
 class DigicoParameterTest extends TestCase
 {
+    /**
+     * Digi-coのパラメーターがデフォルトで作成されること
+     */
     public function testDigicoParameterDefault()
     {
         $digicoParameter = DigicoParameter::for($giftIdentifyCode = 500, $partnerCode = 'partner');
@@ -29,6 +32,9 @@ class DigicoParameterTest extends TestCase
         ], $digicoParameter->getData());
     }
 
+    /**
+     * Digi-coのパラメーターは変更できること
+     */
     public function testDigicoParameter()
     {
         $digicoParameter = DigicoParameter::for($giftIdentifyCode = 500, $partnerCode = 'partner')
