@@ -30,10 +30,9 @@ final class DigicoClient implements DigicoClientInterface
         private readonly string $sendPath,
         private readonly string $baseUrl
     ) {
-        $this->httpClient = new Client([
-            'base_url' => $baseUrl,
-        ]);
+        $this->httpClient = new Client();
     }
+
 
     /**
      * @param DigicoParameter $digicoParameter
@@ -41,6 +40,7 @@ final class DigicoClient implements DigicoClientInterface
      * @param string $sendPath
      * @param string $baseUrl
      * @return static
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public static function createGiftCode(
         DigicoParameter $digicoParameter,
@@ -65,6 +65,7 @@ final class DigicoClient implements DigicoClientInterface
     {
         $decodedResponse = json_decode($this->response->getBody()->getContents(), true);
         $detailCode = DigicoResponseDetailCode::from($decodedResponse['detail_code']);
+        var_dump($detailCode);
         if ($detailCode === DigicoResponseDetailCode::SUCCESS) {
             return $decodedResponse['gifts'][0];
         }
