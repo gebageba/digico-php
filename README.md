@@ -38,5 +38,4 @@ $digicoClient = DigicoClient::createGiftCode(
 
 $response = $digicoClient->response();
 or
-$response = $digicoClient->getFirstGiftCode();
-
+$response = $digicoClient->getFirstGiftCode(); //最初の配列のみ取得できる
