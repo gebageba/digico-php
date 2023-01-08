@@ -65,7 +65,7 @@ final class DigicoClient implements DigicoClientInterface
     {
         $decodedResponse = json_decode($this->response->getBody()->getContents(), true);
         $detailCode = DigicoResponseDetailCode::from($decodedResponse['detail_code']);
-        var_dump($detailCode);
+
         if ($detailCode === DigicoResponseDetailCode::SUCCESS) {
             return $decodedResponse['gifts'][0];
         }
@@ -79,7 +79,7 @@ final class DigicoClient implements DigicoClientInterface
             throw new DigicoException('月毎の交換上限を超過しています', 400);
         }
 
-        throw new DigicoException("{$detailCode}", 500);
+        throw new DigicoException("{$decodedResponse['detail_code']}", 500);
     }
 
     /**
