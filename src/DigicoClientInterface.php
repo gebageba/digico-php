@@ -8,10 +8,6 @@
 
 namespace Evolu\Digico;
 
-use Evolu\Digico\Exception\DigicoException;
-use Evolu\Digico\Exception\GuzzleException;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use Psr\Http\Message\ResponseInterface;
 
 interface DigicoClientInterface

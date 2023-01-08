@@ -18,8 +18,9 @@ final class RequestBodyFlattener
         $flatPair = [];     // we're going to convert objBody to flatPair
 
         foreach ($objBody as $key => $value) {
-            if (is_int($value))
+            if (is_int($value)) {
                 $value = strval($value);
+            }
 
             if (is_array($value)) {
                 $allSubKeys = [];
@@ -36,7 +37,6 @@ final class RequestBodyFlattener
                             is_null($prevFlatValue) ? $flatRawValue : "{$prevFlatValue},{$flatRawValue}";
                     }
                 }
-
             } else {
                 $flatPair[$key] = $value;
             }

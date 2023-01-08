@@ -1,12 +1,18 @@
 <?php
 
+/*
+ * This file is part of DIGICO-PHP.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Evolu\Digico\Test\Unit;
 
 use Evolu\Digico\DigicoClient;
 use Evolu\Digico\DigicoParameter;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\TestCase;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
 class DigicoClientTest extends TestCase
 {
