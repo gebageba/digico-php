@@ -32,8 +32,7 @@ $parameter = DigicoParameter::for($giftIdentifyCode, $partnerCode);
 $digicoClient = DigicoClient::createGiftCode(
     $parameter,
     $dicicoCode = 'xxxxxxxxxxxxx',
-    $sendUrl = '/api/test/v1/gift',
-    $basUrl = 'https://sample' //デフォルト'https://user.digi-co.net'
+    $sendUrl = '/api/test/v1/gift' //テスト用
 );
 
 $response = $digicoClient->response();
